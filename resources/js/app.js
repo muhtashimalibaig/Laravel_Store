@@ -1,13 +1,7 @@
-// lucide icons
+import './bootstrap';
 
-import { createIcons, icons } from "lucide";
+import Alpine from 'alpinejs';
 
-const renderLucideIcons = () => {
-    createIcons({ icons });
-};
+window.Alpine = Alpine;
 
-if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", renderLucideIcons);
-} else {
-    renderLucideIcons();
-}
+Alpine.start();
