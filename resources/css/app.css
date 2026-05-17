@@ -1,0 +1,160 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=DM+Serif+Display:ital@0;1&family=Geist:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Sora:wght@100..800&display=swap");
+@import "tailwindcss";
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+/* =========================
+    ECOMMERCE THEME - PURPLE NEON
+   ========================= */
+
+:root {
+    --bg-primary: #050505;
+    --bg-secondary: #0d0d0d;
+    --bg-panel: #111111;
+
+    --primary: #8b5cf6;
+    --primary-light: #a078ff;
+    --primary-dark: #5b21b6;
+    --secondary: #c084fc;
+
+    --accent-pink: #ff00ff;
+    --accent-cyan: #00e5ff;
+    --accent-green: #39ff14;
+
+    --text-primary: #ffffff;
+    --text-secondary: #a1a1aa;
+    --text-muted: #94a3b8;
+
+    --border-color: rgba(139, 92, 246, 0.28);
+    --shadow-neon:
+        0 0 10px rgba(139, 92, 246, 0.5), 0 0 20px rgba(139, 92, 246, 0.3),
+        0 0 4px rgba(139, 92, 246, 0.2);
+    --transition: all 0.3s ease-in-out;
+}
+
+/* Global */
+body {
+    /* background: linear-gradient(135deg, var(--bg-primary), #0b0014) !important; */
+    color: var(--text-primary);
+    font-family: "Montserrat", sans-serif !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    color: var(--text-primary);
+}
+
+h1 {
+    font-family: "DM Serif Display", serif !important;
+    color: var(--primary);
+}
+
+button,
+a {
+    transition: var(--transition);
+}
+
+/* Reusable UI */
+.neon-banner-card {
+    border: 1px solid rgba(139, 92, 246, 0.15);
+    border-radius: 1.25rem;
+    background: rgba(15, 23, 42, 0.65);
+    padding: 1.25rem;
+    box-shadow: var(--shadow-neon);
+}
+
+.category-card,
+.product-card,
+.feature-card {
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    border-radius: 1.75rem;
+    background: rgba(15, 23, 42, 0.78);
+    padding: 1.5rem;
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.02),
+        0 20px 50px rgba(0, 0, 0, 0.25);
+}
+
+.icon-circle,
+.product-icon,
+.feature-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    min-width: 3rem;
+    min-height: 3rem;
+}
+
+.product-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 0.55rem 0.9rem;
+}
+
+.btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.9rem 1rem;
+    border: 1px solid rgba(139, 92, 246, 0.32);
+    border-radius: 999px;
+    color: var(--text-primary);
+    background: rgba(15, 23, 42, 0.75);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.btn-outline:hover {
+    border-color: rgba(139, 92, 246, 0.65);
+    background: rgba(139, 92, 246, 0.12);
+}
+
+.feature-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1rem;
+    border-radius: 1.5rem;
+    background: rgba(71, 85, 105, 0.15);
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.feature-pill svg {
+    min-width: 1.25rem;
+}
+
+.feature-card {
+    gap: 1rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    padding: 1.25rem;
+    background: rgba(15, 23, 42, 0.82);
+}
+
+.feature-icon {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    border-radius: 1.15rem;
+}
+
+@media (max-width: 640px) {
+    .feature-card {
+        grid-template-columns: 1fr;
+    }
+}
