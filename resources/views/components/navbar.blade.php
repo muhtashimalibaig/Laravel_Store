@@ -170,9 +170,11 @@
                     <!-- Dropdown Menu -->
                     <div class="absolute right-0 mt-2 w-48 bg-slate-900 border border-purple-500/30 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-200">
                         <div class="px-4 py-3 border-b border-purple-500/20">
-                            <p class="text-sm text-gray-300">Guest User</p>
+                            <p class="text-sm text-gray-300">
+                                {{ explode(' ', Auth::user()->name)[0] }}
+                            </p>
                         </div>
-                        <a href="/manage-account" class="block px-4 py-2 text-sm text-gray-300 hover:text-purple-300 hover:bg-purple-500/10 transition">My Account</a>
+                        <a href="/dashboard" class="block px-4 py-2 text-sm text-gray-300 hover:text-purple-300 hover:bg-purple-500/10 transition">Dashboard</a>
                         <a href="/upload-products" class="block px-4 py-2 text-sm text-gray-300 hover:text-purple-300 hover:bg-purple-500/10 transition">Upload Products</a>
                         <a href="/view-all" class="block px-4 py-2 text-sm text-gray-300 hover:text-purple-300 hover:bg-purple-500/10 transition">My Products</a>
                         <div class="border-t border-purple-500/20">

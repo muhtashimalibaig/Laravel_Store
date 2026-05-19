@@ -24,7 +24,12 @@
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(139,92,246,0.25),transparent_60%)] pointer-events-none"></div>
 
         <div class="w-full max-w-3xl relative z-10">
-
+            @if(session('success'))
+            <div id="success-toast"
+                class="fixed top-5 right-5 z-50 px-5 py-3 rounded-xl bg-green-500/20 border border-green-500 text-green-300 shadow-lg backdrop-blur-md transition-opacity duration-500">
+                {{ session('success') }}
+            </div>
+        @endif
             <div class="neon-banner-card">
 
                 <!-- Header -->
@@ -33,7 +38,9 @@
                     <p class="text-sm text-slate-400 mt-2">Add new items to your store catalog</p>
                 </div>
 
-                <form class="space-y-5">
+                <form class="space-y-5" method="post" action="{{ route('products.store') }}" enctype="multipart/form-data">
+
+                @csrf
 
                     <!-- IMAGE UPLOAD BOX -->
                     <div class="border border-dashed border-purple-500/40 rounded-2xl p-6 text-center bg-slate-900/40 hover:bg-slate-900/60 transition">
@@ -50,7 +57,7 @@
                             <p class="text-sm text-slate-300">Drag & drop product image here</p>
                             <p class="text-xs text-slate-500">PNG, JPG up to 2MB</p>
 
-                            <input type="file" class="mt-3 text-sm text-slate-400">
+                            <input type="file" name="product_image" class="mt-3 text-sm text-slate-400">
                         </div>
 
                     </div>
@@ -60,13 +67,13 @@
 
                         <div>
                             <label class="text-sm text-slate-300">Product Name</label>
-                            <input type="text" placeholder="Enter product name"
+                            <input type="text" name="product_name" placeholder="Enter product name"
                                 class="w-full mt-1 px-4 py-2.5 rounded-xl bg-slate-900 border border-purple-500/20 text-white focus:border-purple-400 focus:ring-1 focus:ring-purple-500/40 focus:outline-none">
                         </div>
 
                         <div>
                             <label class="text-sm text-slate-300">Price</label>
-                            <input type="text" placeholder="$0.00"
+                            <input type="text" name="price" placeholder="$0.00"
                                 class="w-full mt-1 px-4 py-2.5 rounded-xl bg-slate-900 border border-purple-500/20 text-white focus:border-purple-400 focus:ring-1 focus:ring-purple-500/40 focus:outline-none">
                         </div>
 
@@ -77,7 +84,7 @@
 
                         <div>
                             <label class="text-sm text-slate-300">Category</label>
-                            <select class="w-full mt-1 px-4 py-2.5 rounded-xl bg-slate-900 border border-purple-500/20 text-white focus:border-purple-400 focus:ring-1 focus:ring-purple-500/40 focus:outline-none">
+                            <select name="category" class="w-full mt-1 px-4 py-2.5 rounded-xl bg-slate-900 border border-purple-500/20 text-white focus:border-purple-400 focus:ring-1 focus:ring-purple-500/40 focus:outline-none">
                                 <option>Streetwear</option>
                                 <option>Fitness</option>
                                 <option>Accessories</option>
@@ -87,7 +94,7 @@
 
                         <div>
                             <label class="text-sm text-slate-300">Stock</label>
-                            <input type="number" placeholder="0"
+                            <input type="number" placeholder="0" name="stock"
                                 class="w-full mt-1 px-4 py-2.5 rounded-xl bg-slate-900 border border-purple-500/20 text-white focus:border-purple-400 focus:ring-1 focus:ring-purple-500/40 focus:outline-none">
                         </div>
 
@@ -96,13 +103,13 @@
                     <!-- DESCRIPTION -->
                     <div>
                         <label class="text-sm text-slate-300">Description</label>
-                        <textarea rows="4" placeholder="Write product details..."
+                        <textarea name="description" rows="4" placeholder="Write product details..."
                             class="w-full mt-1 px-4 py-3 rounded-xl bg-slate-900 border border-purple-500/20 text-white focus:border-purple-400 focus:ring-1 focus:ring-purple-500/40 focus:outline-none"></textarea>
                     </div>
 
                     <div class="flex justify-between items-center">
                     <!-- BUTTON -->
-                    <x-button>Upload Products</x-button>
+                    <button type="submit">Upload Products</button>
                     <x-button href="/" variant="secondary" :icon="false">Cancel</x-button>
                     </div>
                 </form>
@@ -116,4 +123,17 @@
     @include('components.footer')
 
 </body>
+<script>
+    const toast = document.getElementById('success-toast');
+
+    if (toast) {
+        setTimeout(() => {
+            toast.style.opacity = '0';
+
+            setTimeout(() => {
+                toast.remove();
+            }, 500); // smooth fade out
+        }, 10000); // 10 seconds
+    }
+</script>
 </html>

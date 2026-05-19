@@ -7,6 +7,9 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
         body {
             background: var(--bg-primary);
@@ -48,126 +51,80 @@
             </div>
 
             <!-- Products Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
-                <!-- Product Card -->
-                <div class="neon-banner-card group hover:-translate-y-1 transition">
+@forelse($products as $product)
 
-                    <div class="relative">
+<div class="neon-banner-card group hover:-translate-y-1 transition">
 
-                        <!-- Badge -->
-                        <span class="absolute top-3 left-3 text-xs px-3 py-1 rounded-full bg-purple-500/20 text-purple-300">
-                            New
-                        </span>
+    <!-- ACTIONS -->
+    <div class="flex justify-end gap-2 mb-2">
 
-                        <!-- Image -->
-                        <div class="h-40 bg-slate-900 rounded-xl flex items-center justify-center">
-                            <span class="text-slate-500 text-sm">Product Image</span>
-                        </div>
+        <!-- EDIT -->
+        <a href="{{ route('products.edit', $product->id) }}"
+           class="p-2 rounded-lg bg-blue-500/10 hover:bg-blue-500/20">
+            <i data-lucide="edit" class="w-5 h-5 text-blue-400"></i>
+        </a>
 
-                    </div>
+        <!-- DELETE -->
+        <form action="{{ route('products.delete', $product->id) }}"
+              method="POST"
+              onsubmit="return confirm('Delete this product?')">
 
-                    <!-- Info -->
-                    <div class="mt-4 space-y-2">
+            @csrf
+            @method('DELETE')
 
-                        <h3 class="text-lg font-semibold group-hover:text-purple-300 transition">
-                            Neon Jacket
-                        </h3>
+            <button class="p-2 rounded-lg bg-red-500/10 hover:bg-red-500/20">
+                <i data-lucide="trash-2" class="w-5 h-5 text-red-400"></i>
+            </button>
+        </form>
 
-                        <p class="text-sm text-slate-400">
-                            Premium reflective streetwear jacket
-                        </p>
+    </div>
 
-                        <div class="flex items-center justify-between mt-3">
+    <!-- IMAGE -->
+    <div class="h-80 bg-slate-900 rounded-xl overflow-hidden">
+        <img src="{{ asset('storage/' . $product->product_image) }}"
+             class="w-full h-full object-cover">
+    </div>
 
-                            <span class="text-purple-300 font-bold">$120</span>
+    <!-- INFO -->
+    <div class="mt-4 space-y-2">
 
-                            <span class="text-xs text-slate-400">
-                                Stock: 12
-                            </span>
+        <h3 class="text-lg font-semibold">
+            {{ $product->product_name }}
+        </h3>
 
-                        </div>
+        <p class="text-sm text-slate-400 line-clamp-2">
+            {{ $product->description }}
+        </p>
 
-                        <!-- Button -->
-                        <button class="w-full mt-3 py-2 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm font-semibold hover:-translate-y-0.5 transition">
-                            View Product
-                        </button>
+        <div class="flex justify-between">
+            <span class="text-purple-300 font-bold">${{ $product->price }}</span>
+            <span class="text-green-400 text-xs">Stock: {{ $product->stock }}</span>
+        </div>
 
-                    </div>
+    </div>
 
-                </div>
+</div>
 
-                <!-- Duplicate cards (example) -->
-                <div class="neon-banner-card group hover:-translate-y-1 transition">
-                    <div class="relative">
-                        <span class="absolute top-3 left-3 text-xs px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300">
-                            Hot
-                        </span>
+@empty
+<div class="col-span-3 text-center text-slate-400">
+    No products found
+</div>
+@endforelse
 
-                        <div class="h-40 bg-slate-900 rounded-xl flex items-center justify-center">
-                            <span class="text-slate-500 text-sm">Product Image</span>
-                        </div>
-                    </div>
-
-                    <div class="mt-4 space-y-2">
-                        <h3 class="text-lg font-semibold group-hover:text-purple-300 transition">
-                            Smart Watch
-                        </h3>
-
-                        <p class="text-sm text-slate-400">
-                            Futuristic fitness tracking watch
-                        </p>
-
-                        <div class="flex items-center justify-between mt-3">
-                            <span class="text-purple-300 font-bold">$89</span>
-                            <span class="text-xs text-slate-400">Stock: 5</span>
-                        </div>
-
-                        <button class="w-full mt-3 py-2 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm font-semibold hover:-translate-y-0.5 transition">
-                            View Product
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Third card -->
-                <div class="neon-banner-card group hover:-translate-y-1 transition">
-                    <div class="relative">
-                        <span class="absolute top-3 left-3 text-xs px-3 py-1 rounded-full bg-pink-500/20 text-pink-300">
-                            Sale
-                        </span>
-
-                        <div class="h-40 bg-slate-900 rounded-xl flex items-center justify-center">
-                            <span class="text-slate-500 text-sm">Product Image</span>
-                        </div>
-                    </div>
-
-                    <div class="mt-4 space-y-2">
-                        <h3 class="text-lg font-semibold group-hover:text-purple-300 transition">
-                            Neon Sneakers
-                        </h3>
-
-                        <p class="text-sm text-slate-400">
-                            Glow-in-the-dark running shoes
-                        </p>
-
-                        <div class="flex items-center justify-between mt-3">
-                            <span class="text-purple-300 font-bold">$150</span>
-                            <span class="text-xs text-slate-400">Stock: 20</span>
-                        </div>
-
-                        <button class="w-full mt-3 py-2 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm font-semibold hover:-translate-y-0.5 transition">
-                            View Product
-                        </button>
-                    </div>
-                </div>
-
-            </div>
+</div>
 
         </div>
 
     </main>
 
     @include('components.footer')
+
+    <!-- Activate Lucide -->
+    <script>
+        lucide.createIcons();
+    </script>
 
 </body>
 </html>
